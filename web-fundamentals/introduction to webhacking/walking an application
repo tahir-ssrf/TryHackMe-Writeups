@@ -1,1 +1,83 @@
+# Walking an Application  
+**Learning Path:** TryHackMe Web Fundamentals  
+**Module:** Web Application Basics  
+**Difficulty:** Beginner  
+**Status:** ✅ Completed  
+**Completion Date:** January 14, 2026  
+**Duration:** 45 minutes  
 
+---
+
+## 📋 Learning Objectives  
+- Deconstruct URL components and their role in resource identification  
+- Differentiate HTTP methods and their semantic purposes  
+- Interpret HTTP response codes and headers for application diagnostics  
+- Map complete request-response lifecycle in web communications  
+
+---
+
+## Core Concepts  
+
+### URL Structure & Parsing  
+https://tryhackme.com/room/webapplicationbasics?param=value#section
+└─ Protocol │ └─ Domain │ └─ Path │ └─ Query │ └─ Fragment
+
+
+**Key Components:**  
+- **Protocol:** Defines communication security (HTTP vs HTTPS)  
+- **Domain:** Resolves to target server via DNS  
+- **Path:** Locates specific resource on server  
+- **Query Parameters:** Pass data to server-side logic  
+
+### HTTP Methods (RESTful Semantics)  
+| Method | Purpose | Idempotent | Safe | Pentesting Relevance |  
+|--------|---------|------------|------|---------------------|  
+| `GET` | Retrieve resource | ✅ Yes | ✅ Yes | Parameter discovery |  
+| `POST` | Create/Submit data | ❌ No | ❌ No | Form injection |  
+| `PUT` | Update resource | ✅ Yes | ❌ No | Resource manipulation |  
+| `DELETE` | Remove resource | ✅ Yes | ❌ No | Privilege escalation |  
+
+ HTTP Response Analysis  
+**Status Code Categories:**  
+2xx Success → 200 OK, 201 Created
+4xx Client Error → 400 Bad Request, 401 Unauthorized, 404 Not Found
+5xx Server Error → 500 Internal, 503 Service Unavailable
+
+
+
+**Critical Headers:**  
+Content-Type: application/json
+Set-Cookie: session=abc123; HttpOnly; Secure
+X-Frame-Options: DENY
+
+
+
+
+
+## 🧠 Key Technical Takeaways  
+- **URL parsing reveals attack surface** (query manipulation, path traversal)  
+- **Method confusion vulnerabilities** (GET sensitive data, POST without CSRF)  
+- **Status code leaks** expose application state and authentication flaws  
+- **Header analysis** uncovers session management and security controls  
+
+
+
+## 🔍 Pentesting Applications  
+**Immediate Relevance:**  
+reconnaissance → Burp Suite proxying → Parameter fuzzing
+↓
+HTTP method manipulation → Auth bypass attempts
+
+text
+
+**Foundation For:** OWASP Top 10 (Injection, Broken Auth, Sensitive Data Exposure)  
+
+
+
+## 📈 Progression Metrics  
+Web Fundamentals Progress: 3/15 modules [██████████] 20%
+Portfolio Contribution: HTTP fundamentals → Web vulnerability exploitation
+
+
+
+**Next Room:**content Discovery 
