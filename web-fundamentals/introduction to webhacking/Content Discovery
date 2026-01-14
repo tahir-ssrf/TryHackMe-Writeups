@@ -1,0 +1,115 @@
+# Content Discovery  
+**Learning Path:** TryHackMe Web Fundamentals  
+**Module:** Content Discovery  
+**Difficulty:** Beginner  
+**Status:** ✅ Completed  
+**Completion Date:** January 14, 2026  
+**Duration:** 60 minutes  
+
+---
+
+## 📋 Learning Objectives  
+- Perform manual content discovery using common web files (robots.txt, sitemap.xml, favicon)  
+- Analyze HTTP headers and framework fingerprints for attack surface mapping  
+- Execute OSINT techniques (Google Dorking, Wappalyzer, Wayback Machine, GitHub, S3)  
+- Implement automated directory enumeration tools  
+
+## Core Concepts  
+
+### Manual Discovery Techniques  
+
+**Task 2: Robots.txt**  
+GET /robots.txt → Reveals disallowed paths, hidden directories, admin panels
+Disallow: /admin/ → Potential admin interface
+Disallow: /backup/ → Sensitive backups exposed
+
+**Pentesting Value:** Directory enumeration starting points  
+
+**Task 3: Favicon Fingerprinting**  
+favicon.ico → Framework detection via icon hash
+/admin/favicon.ico → Hidden admin detection
+
+**Tools:** Favicon-based CMS detection services  
+
+**Task 4: Sitemap.xml**  
+GET /sitemap.xml → Complete site structure mapping
+Complete URL inventory for crawling/burping
+
+
+**Pentesting Value:** Attack surface expansion  
+
+**Task 5: HTTP Headers Analysis**  
+Server: Apache/2.4.41
+X-Powered-By: PHP/7.4.3
+X-Frame-Options: DENY (security header present)
+
+
+**Fingerprinting:** Version disclosure → exploit research  
+
+**Task 6: Framework Stack Detection**  
+BuiltWith/Wappalyzer → CMS, JS frameworks, server tech
+
+
+**Attack Planning:** Framework-specific exploits  
+
+### OSINT Intelligence Gathering  
+
+**Task 7: Google Dorking**  
+site:target.com ext:sql | ext:backup | ext:log
+inurl:admin | inurl:login filetype:php
+
+
+**Discovery:** Config files, debug pages, hidden endpoints  
+
+**Task 8: Wappalyzer Integration**  
+Browser extension → Real-time tech stack detection
+CMS: WordPress 6.4.1 → Known vulnerabilities
+
+
+**Immediate Impact:** Targeted exploit selection  
+
+**Task 9: Wayback Machine**  
+archive.org → Historical versions, removed pages
+Deleted functionality → Parameter discovery
+
+
+**Value:** Dead endpoints, old authentication flows  
+
+**Task 10: GitHub Reconnaissance**  
+github.com org:target → Source code leaks
+Hardcoded credentials, API keys, internal paths
+
+
+
+**Task 11: S3 Bucket Enumeration**  
+targetcompany.s3.amazonaws.com
+Bucket permissions → Unauthenticated access
+
+
+**High Impact:** Data exposure, config dumps  
+
+### Task 12: Automated Discovery  
+ffuf -w wordlist.txt -u https://target.com/FUZZ
+dirb / gobuster → Directory brute forcing
+
+
+**Scalability:** Exhaustive endpoint discovery  
+
+
+## 🧠 Key Technical Takeaways  
+Manual → OSINT → Automated reconnaissance methodology
+robots.txt + sitemap.xml = 80% attack surface mapping
+Framework fingerprinting → Targeted vulnerability research
+Google Dorks + GitHub = External asset discovery
+
+**Attack Surface Multiplier:** Each technique compounds discovery  
+
+
+## 🔍 Pentesting Applications  
+Content Discovery → Burp Suite Spider → Vulnerability Scanning
+↓
+Parameter Discovery → Authentication Bypass → RCE Chains
+
+**Foundation For:** OWASP Top 10 A5 (Security Misconfiguration), API testing  
+
+**Next Module:** Subdomain Enumeration 
