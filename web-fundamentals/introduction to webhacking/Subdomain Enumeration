@@ -1,0 +1,80 @@
+# Subdomain Enumeration  
+**Learning Path:** TryHackMe Web Fundamentals  
+**Module:** Subdomain Enumeration  
+**Difficulty:** Beginner  
+**Status:** ✅ Completed  
+**Completion Date:** January 14, 2026  
+**Duration:** 55 minutes  
+
+## 📋 Learning Objectives  
+- Extract subdomains from SSL/TLS certificates (Certificate Transparency logs)  
+- Leverage search engines for passive subdomain discovery  
+- Execute DNS bruteforce attacks for active enumeration  
+- Utilize Sublist3r for comprehensive subdomain harvesting  
+- Identify virtual hosts through Host header manipulation  
+
+
+## Core Concepts  
+
+### OSINT - SSL/TLS Certificates (Task 2)  
+crt.sh → Certificate Transparency logs
+Search: %.target.com → All issued certificates
+
+**Discovery Value:**  
+*.staging.target.com
+*.api.target.com
+*.dev.target.com
+**Pentesting Impact:** Hidden environments, wildcard coverage  
+
+### OSINT - Search Engines (Task 3)  
+Google: site:*.target.com -www
+Bing: site:target.com -inurl:(www)
+
+**Advanced Dorks:**  
+site:.target.com -inurl:(login | signup)
+filetype:xml site:.target.com (sitemap discovery)
+
+**Value:** Forgotten subdomains in search indexes  
+
+### DNS Bruteforce (Task 4)  
+gobuster dns -d target.com -w subdomains.txt
+dnsrecon -d target.com -t brt
+
+
+**Common Patterns:**  
+admin, api, staging, dev, test, beta, mail, vpn, db
+**Success Rate:** 10-20% with quality wordlists  
+
+### OSINT - Sublist3r (Task 5)  
+sublist3r -d target.com -o subdomains.txt
+sublist3r -d target.com -b -t 50 (bruteforce + threading)
+
+**Sources:** Google, Bing, VirusTotal, Netcraft, ThreatCrowd, SSL certs  
+**Output:** 100s-1000s subdomains per target  
+
+### Virtual Hosts (Task 6)  
+GET / HTTP/1.1
+Host: randomguess.target.com
+
+**Discovery Methods:**  
+ffuf -u https://target.com -H "Host: FUZZ.target.com" -w vhost.txt
+gobuster vhost -u target.com -w vhost.txt
+
+
+**Targets:** Internal apps, misconfigured load balancers  
+
+## 🧠 Key Technical Takeaways  
+SSL Certs → Search Engines → Bruteforce → Sublist3r → Virtual Hosts
+Each method compounds: 100 → 500 → 1200+ subdomains
+80% attack surface expansion from subdomain discovery
+
+**Enumeration Pipeline:**  
+crt.sh → sublist3r → dnsgen → httpx → burp suite
+
+
+## 🔍 Pentesting Applications  
+Subdomains → httpx (live hosts) → aquatone (screenshots)
+↓
+Content Discovery → Vulnerability Scanning → RCE chain
+
+**Next Module:** Authentication Bypass 
