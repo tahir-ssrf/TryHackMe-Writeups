@@ -1,0 +1,76 @@
+# IDOR (Insecure Direct Object Reference)  
+**Learning Path:** TryHackMe Web Fundamentals  
+**Module:** IDOR Vulnerability  
+**Difficulty:** Beginner  
+**Status:** ✅ Completed  
+**Completion Date:** January 14, 2026  
+**Duration:** 50 minutes  
+
+## 📋 What I Learned (Simple Explanation)  
+**IDOR = "Read other's data by changing one number"**  
+Websites use IDs like `user=123`. Hackers change to `user=124` and see someone else's info!
+
+## Core Concepts (Anyone Can Understand)  
+
+### 1. What is IDOR? (Task 1)  
+**Normal website:** You see YOUR profile: `/profile?id=123`  
+**Broken website:** Change to `/profile?id=124` → See OTHER person's profile! 😱  
+
+Your profile: /account.php?id=123 (your data)
+Change number: /account.php?id=124 (boss's salary! 💰)
+
+### 2. Simple IDOR Example (Task 2)  
+Normal: View my photo #123
+Hack: View CEO photo #456
+Just change 123 → 456 = steal private photos!
+
+### 3. Hidden IDs - Base64 Encoding (Task 3)  
+**Trick:** Website hides ID: `eyJ1c2VyIjoiMTIzIn0=`  
+**Hack:** Decode → Change 123→124 → Encode → Access other user!  
+
+Looks secret: eyJ1c2VyIjoiMTIzIn0=
+Real meaning: {"user":"123"}
+
+### 4. Fake Secure IDs - Hashing (Task 4)  
+**Website thinks:** "MD5 hash = secure!"  
+**Reality:** Sequential hashes = guess next user  
+user1: 5f4dcc3b5aa765d61d8327deb882cf99
+user2: d41d8cd98f00b204e9800998ecf8427e (predictable!)
+
+### 5. UUIDs Aren't Safe (Task 5)  
+**"Random" IDs:** `550e8400-e29b-41d4-a716-446655440000`  
+**Hack:** Many aren't truly random → guess patterns  
+
+### 6. Where IDORs Hide (Task 6)  
+**Common spots:**
+URLs: /profile?id=123
+API: /api/user/123/orders
+JSON: {"user_id": 123}
+Files: /download.php?file=123.pdf
+
+### 7. Real Attack Example (Task 7)  
+Step 1: My invoice: /invoice.php?id=1001
+Step 2: Try: /invoice.php?id=1002 (boss's invoice!)
+Step 3: Download: CEO's private financial data stolen
+
+
+## 🧠 Key Takeaways (Super Simple)  
+Numbers in URLs = try other numbers
+
+Base64 = easy decode + change
+
+Hashes = guess patterns
+
+APIs = same ID problem
+
+90% websites have this bug!
+
+**Real job value:** Fix IDOR = prevent data breaches
+
+## 🔍 Why Hackers Love IDOR  
+1 minute work → Steal all customer data
+No password needed → Direct database access
+
+**Leads to:** Data leaks, account takeover, ransomware 
+
+**Next Room:** File Inclusion
