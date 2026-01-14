@@ -1,0 +1,68 @@
+# Authentication Bypass  
+**Learning Path:** TryHackMe Web Fundamentals  
+**Module:** Authentication Bypass  
+**Difficulty:** Beginner  
+**Status:** ✅ Completed  
+**Completion Date:** January 14, 2026  
+**Duration:** 50 minutes  
+
+## 📋 What I Learned (Simple Explanation)  
+Authentication = Login system. Bypass = Get in without password. Here's exactly how:
+
+
+
+## Core Concepts (Anyone Can Understand)  
+
+### 1. Username Guessing (Task 2)  
+**The Trick:** Websites tell you if username exists  
+Try "admin" → "Wrong password" = ADMIN EXISTS! 🎯
+Try "xyz123" → "No user found" = DOESN'T EXIST ❌
+
+
+**Why it works:** Lazy error messages give away valid usernames  
+
+### 2. Password Guessing (Task 3)  
+**The Method:** Computer tries 1000s passwords fast  
+Tool: Hydra (like super-fast typing robot)
+Passwords: admin, 123456, password123, rockyou.txt list
+
+**Smart way:** Go slow to avoid lockout  
+
+### 3. Broken Login Logic (Task 4)  
+**The Bug:** Website doesn't check properly  
+Normal: username=admin&password=secret123
+Broken: username=admin&password= (EMPTY!) → LOGS IN! 😱
+
+**Common mistakes:** 
+- Empty password works
+- Clicks "Login" button = auto login  
+- Forgets to check password field  
+
+### 4. Cookie Tricks (Task 5)  
+**What are cookies?** Tiny notes browser keeps  
+Normal cookie: user=john; admin=false
+Hacked cookie: user=john; admin=true → ADMIN ACCESS! 🏆
+
+
+**How:** Browser extension changes cookie value
+
+## 🧠 Key Takeaways (Super Simple)  
+Error messages = username list
+
+Robots guess passwords
+
+Empty fields sometimes work
+
+Change cookies = become admin
+
+
+
+**Real job value:** Every website has these bugs. Fix them = security job!
+
+## 🔍 Why Hackers Love This  
+Find login → Guess username → Try tricks → Become admin
+5 minutes → Full website control
+
+**Leads to:** Stealing data, changing passwords, ransomware  
+
+**Next Room:** IDOR
